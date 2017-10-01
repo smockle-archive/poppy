@@ -5,7 +5,10 @@
   "main": "lib/index.js",
   "module": "lib/index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node -r @std/esm test/index.mjs | colortape",
+    "coverage": "nyc --require @std/esm --extension .mjs --reporter=lcov node test/index.mjs | colortape",
+    "postcoverage": "nyc report",
+    "prepublishOnly": "npm test",
     "precommit": "lint-staged"
   },
   "repository": {
@@ -31,6 +34,8 @@
     ]
   },
   "devDependencies": {
+    "codecov": "^2.3.0",
+    "colortape": "^0.1.2",
     "eslint": "^4.8.0",
     "eslint-config-standard": "^10.2.1",
     "eslint-plugin-import": "^2.7.0",
@@ -39,6 +44,7 @@
     "eslint-plugin-standard": "^3.0.1",
     "husky": "^0.14.3",
     "lint-staged": "^4.2.3",
+    "nyc": "^11.2.1",
     "prettier-eslint-cli": "^4.4.0"
   }
 }
