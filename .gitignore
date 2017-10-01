@@ -1,4 +1,6 @@
 node_modules
 .esm-cache
+coverage
+.nyc_output
 *.log
 .DS_Store
