@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "module": "lib/index.mjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "precommit": "lint-staged"
   },
   "repository": {
     "type": "git",
@@ -22,6 +23,12 @@
   },
   "@std/esm": {
     "cjs": true
+  },
+  "lint-staged": {
+    "*.{js,mjs}": [
+      "./node_modules/.bin/prettier-eslint --write",
+      "git add"
+    ]
   },
   "devDependencies": {
     "eslint": "^4.8.0",
