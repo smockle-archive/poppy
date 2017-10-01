@@ -3,6 +3,8 @@
 [![Build Status](https://travis-ci.org/smockle/poppy.svg?branch=master)](https://travis-ci.org/smockle/poppy)
 [![Build status](https://ci.appveyor.com/api/projects/status/t3j9ve636jbh9o92?svg=true)](https://ci.appveyor.com/project/smockle/poppy)
 [![codecov](https://codecov.io/gh/smockle/poppy/branch/master/graph/badge.svg)](https://codecov.io/gh/smockle/poppy)
+[![Known Vulnerabilities](https://snyk.io/test/github/smockle/poppy/badge.svg)](https://snyk.io/test/github/smockle/poppy)
+[![Greenkeeper badge](https://badges.greenkeeper.io/smockle/poppy.svg)](https://greenkeeper.io/)
 Discover popular Twitter accounts.
 
 ## Installation
