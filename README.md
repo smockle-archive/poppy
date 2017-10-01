@@ -5,6 +5,7 @@
 [![codecov](https://codecov.io/gh/smockle/poppy/branch/master/graph/badge.svg)](https://codecov.io/gh/smockle/poppy)
 [![Known Vulnerabilities](https://snyk.io/test/github/smockle/poppy/badge.svg)](https://snyk.io/test/github/smockle/poppy)
 [![Greenkeeper badge](https://badges.greenkeeper.io/smockle/poppy.svg)](https://greenkeeper.io/)
+
 Discover popular Twitter accounts.
 
 ## Installation
