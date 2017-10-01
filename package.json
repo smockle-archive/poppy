@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/smockle/poppy/issues"
   },
-  "homepage": "https://github.com/smockle/poppy#readme"
+  "homepage": "https://github.com/smockle/poppy#readme",
+  "dependencies": {
+    "@std/esm": "^0.11.1"
+  }
 }
