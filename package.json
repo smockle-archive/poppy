@@ -1,0 +1,19 @@
+{
+  "name": "poppy",
+  "version": "1.0.0",
+  "description": "Discover popular Twitter accounts",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smockle/poppy.git"
+  },
+  "author": "Clay Miller <clay@smockle.com> (https://smockle.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/smockle/poppy/issues"
+  },
+  "homepage": "https://github.com/smockle/poppy#readme"
+}
