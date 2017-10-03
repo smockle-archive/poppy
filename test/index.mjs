@@ -1,1 +1,1 @@
-console.log('Test passed.')
+import './username'
