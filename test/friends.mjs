@@ -1,7 +1,10 @@
 import fs from 'fs'
 import test from 'tape'
 import testdouble from 'testdouble'
+import util from 'util'
 import Friends from '../lib/friends'
+
+// Dynamic database key
 let username
 
 // Override 'Friends.databasePath'
@@ -18,22 +21,28 @@ const fakeFriends = {
 }
 testdouble.replace(Friends, 'fetch', () => fakeFriends)
 
-function beforeEach () {
-  fs.unlinkSync(databasePath)
-  fs.writeFileSync(databasePath, '')
-  username = Date.now()
-}
-
 test('Friends.constructor', t => {
   t.plan(2)
-
+  function beforeEach () {
+    fs.unlinkSync(databasePath)
+    fs.writeFileSync(databasePath, '')
+    username = Date.now()
+  }
   beforeEach()
   t.deepEqual(
     (Friends(username), JSON.parse(fs.readFileSync(databasePath, 'utf8'))),
     { [username]: fakeFriends },
     'write to database'
   )
-
   beforeEach()
   t.deepEqual(Friends(username).valueOf(), fakeFriends, 'read from database')
+})
+
+test('Username.inspect', t => {
+  t.plan(1)
+  t.equal(
+    util.inspect(Friends(username)),
+    JSON.stringify({ [username]: fakeFriends }),
+    'valid'
+  )
 })
