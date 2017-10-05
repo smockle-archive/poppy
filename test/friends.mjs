@@ -2,6 +2,7 @@ import fs from 'fs'
 import test from 'tape'
 import testdouble from 'testdouble'
 import Friends from '../lib/friends'
+let username
 
 // Override 'Friends.databasePath'
 const databasePath = 'data/test.json'
@@ -20,15 +21,23 @@ testdouble.replace(Friends, 'fetch', () => fakeFriends)
 function beforeEach () {
   fs.unlinkSync(databasePath)
   fs.writeFileSync(databasePath, '')
+  username = Date.now()
 }
 
 test('Friends.constructor', t => {
-  t.plan(1)
+  t.plan(2)
 
   beforeEach()
   t.deepEqual(
-    new Friends('smockled').valueOf(),
+    (new Friends(username), JSON.parse(fs.readFileSync(databasePath, 'utf8'))),
+    { [username]: fakeFriends },
+    'write to database'
+  )
+
+  beforeEach()
+  t.deepEqual(
+    new Friends(username).valueOf(),
     fakeFriends,
-    'verify save & retrieve'
+    'read from database'
   )
 })
