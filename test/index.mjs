@@ -1,2 +1,2 @@
 import './username'
-import './friends'
+import './account'

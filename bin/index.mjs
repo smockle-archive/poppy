@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import fs from 'fs'
 import path from 'path'
-import Friends from '../lib/friends'
+import Account from '../lib/account'
 
 // TODO: Replace this when `import.meta` is accepted: https://github.com/tc39/proposal-import-meta
 // See also: https://github.com/standard-things/esm/issues/52
@@ -28,6 +28,6 @@ Usage:
 Example:
   $ poppy "smockled"`)
 } else {
-  const friends = Friends(username)
-  console.log(friends)
+  const account = Account(username)
+  console.log(account)
 }
