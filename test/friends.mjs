@@ -18,7 +18,7 @@ const fakeFriends = {
 testdouble.replace(Friends, 'fetch', () => fakeFriends)
 
 function beforeEach () {
-  fs.unlink(databasePath)
+  fs.unlinkSync(databasePath)
   fs.writeFileSync(databasePath, '')
 }
 
