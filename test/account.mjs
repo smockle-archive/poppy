@@ -1,15 +1,25 @@
 import fs from 'fs'
 import test from 'tape'
-import testdouble from 'testdouble'
+import td from 'testdouble'
 import util from 'util'
 import Account from '../lib/account'
 
 // Dynamic database key
-let username
+let id
 
 // Override 'Account.databasePath'
 const databasePath = 'data/test.json'
-testdouble.replace(Account, 'databasePath', databasePath)
+td.replace(Account, 'databasePath', databasePath)
+
+// Override 'Account.fetchSelf'
+const fakeSelf = {
+  name: 'Twitter API',
+  id_str: '6253282',
+  id: 6253282,
+  friends_count: 31,
+  screen_name: 'twitterapi'
+}
+td.replace(Account, 'fetchSelf', () => fakeSelf)
 
 // Override 'Account.fetchFriends'
 const fakeFriends = {
@@ -19,25 +29,30 @@ const fakeFriends = {
   next_cursor: 0,
   next_cursor_str: '0'
 }
-testdouble.replace(Account, 'fetchFriends', () => fakeFriends)
+td.replace(Account, 'fetchFriends', () => fakeFriends)
 
 test('Account.constructor', t => {
   t.plan(2)
   function beforeEach () {
     fs.unlinkSync(databasePath)
     fs.writeFileSync(databasePath, '')
-    username = Date.now()
+    id = Date.now()
   }
   beforeEach()
   t.deepEqual(
-    (Account(username), JSON.parse(fs.readFileSync(databasePath, 'utf8'))),
-    { [username]: { friends: fakeFriends.ids } },
+    (Account(id), JSON.parse(fs.readFileSync(databasePath, 'utf8'))),
+    {
+      [fakeSelf.id]: {
+        username: fakeSelf.screen_name,
+        friends: fakeFriends.ids
+      }
+    },
     'write to database'
   )
   beforeEach()
   t.deepEqual(
-    Account(username).valueOf(),
-    { friends: fakeFriends.ids },
+    Account(id).valueOf(),
+    { username: fakeSelf.screen_name, friends: fakeFriends.ids },
     'read from database'
   )
 })
@@ -45,8 +60,13 @@ test('Account.constructor', t => {
 test('Account.inspect', t => {
   t.plan(1)
   t.equal(
-    util.inspect(Account(username)),
-    JSON.stringify({ [username]: { friends: fakeFriends.ids } }),
+    util.inspect(Account(id)),
+    JSON.stringify({
+      [fakeSelf.id]: {
+        username: fakeSelf.screen_name,
+        friends: fakeFriends.ids
+      }
+    }),
     'valid'
   )
 })
