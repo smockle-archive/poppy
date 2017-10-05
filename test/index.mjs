@@ -1,1 +1,2 @@
 import './username'
+import './friends'
