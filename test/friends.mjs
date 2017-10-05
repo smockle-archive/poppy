@@ -29,15 +29,11 @@ test('Friends.constructor', t => {
 
   beforeEach()
   t.deepEqual(
-    (new Friends(username), JSON.parse(fs.readFileSync(databasePath, 'utf8'))),
+    (Friends(username), JSON.parse(fs.readFileSync(databasePath, 'utf8'))),
     { [username]: fakeFriends },
     'write to database'
   )
 
   beforeEach()
-  t.deepEqual(
-    new Friends(username).valueOf(),
-    fakeFriends,
-    'read from database'
-  )
+  t.deepEqual(Friends(username).valueOf(), fakeFriends, 'read from database')
 })
